@@ -3,8 +3,20 @@
 function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
+  source normalize
 
-  uname -a
+  local url_concourse_Darwin="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/concourse_darwin_amd64"
+  local url_concourse_Linux="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/concourse_linux_amd64"
+
+  local url_concourse="url_concourse_$(uname -s)"
+  local fnm_concourse="$(basename "${!url_concourse}")"
+  cache curl "$fnm_concourse" "${!url_concourse}"
+
+  mkdir -p "$shome/bin"
+  pushd "$shome/bin"
+  cp "${DATA}/cache/curl/$fnm_concourse" "$shome/bin/concourse"
+  chmod 755 "$shome/bin/concourse"
+  popd
 }
 
 main "$@"

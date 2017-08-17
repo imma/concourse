@@ -6,7 +6,7 @@ function _concourse_profile {
   #export ANSIBLE_ROLES_PATH="$shome/roles${ANSIBLE_ROLES_PATH:+:${ANSIBLE_ROLES_PATH}}"
   #export ANSIBLE_LIBRARY="$shome/library${ANSIBLE_LIBRARY:+:${ANSIBLE_LIBRARY}}"
 
-  CONCOURSE_VERSION='0.0.1'
+  CONCOURSE_VERSION='3.4.0'
 }
 
 _concourse_profile
