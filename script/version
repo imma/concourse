@@ -5,7 +5,11 @@ function version {
   source "$shome/script/profile"
 
   local ver_concourse="$(concourse --version 2>/dev/null || true)"
-  jq -n --arg concourse "$ver_concourse" '{concourse: $concourse}'
+  local ver_fly="$(fly --version 2>/dev/null || true)"
+  jq -n \
+    --arg concourse "$ver_concourse" \
+    --arg fly "$ver_fly" \
+    '{concourse: $concourse, fly: $fly}'
 }
 
 version "$@"

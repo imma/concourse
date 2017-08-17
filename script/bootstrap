@@ -17,6 +17,19 @@ function main {
   cp "${DATA}/cache/curl/$fnm_concourse" "$shome/bin/concourse"
   chmod 755 "$shome/bin/concourse"
   popd
+
+  local url_fly_Darwin="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/fly_darwin_amd64"
+  local url_fly_Linux="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/fly_linux_amd64"
+
+  local url_fly="url_fly_$(uname -s)"
+  local fnm_fly="$(basename "${!url_fly}")"
+  cache curl "$fnm_fly" "${!url_fly}"
+
+  mkdir -p "$shome/bin"
+  pushd "$shome/bin"
+  cp "${DATA}/cache/curl/$fnm_fly" "$shome/bin/fly"
+  chmod 755 "$shome/bin/fly"
+  popd
 }
 
 main "$@"
