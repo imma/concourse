@@ -4,7 +4,7 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_concourse="0.0.1"
+  local ver_concourse="$(concourse --version 2>/dev/null || true)"
   jq -n --arg concourse "$ver_concourse" '{concourse: $concourse}'
 }
 
