@@ -4,6 +4,13 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
+  if [[ "$(uname -s)" == "Linux" ]]; then
+    if [[ ! -f /proc/self/uid_map ]]; then
+      # TODO linux client needs this file
+      return 0
+    fi
+  fi
+
   if [[ "$($shome/script/version | jq -r '.concourse')" != "$CONCOURSE_VERSION" ]]; then
     return 1
   fi
