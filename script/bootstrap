@@ -9,7 +9,7 @@ function main {
   local url_concourse_Linux="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/concourse_linux_amd64"
 
   local url_concourse="url_concourse_$(uname -s)"
-  local fnm_concourse="$(basename "${!url_concourse}")"
+  local fnm_concourse="$(basename "${!url_concourse}")-${CONCOURSE_VERSION}"
   cache curl "$fnm_concourse" "${!url_concourse}"
 
   mkdir -p "$shome/bin"
@@ -22,7 +22,7 @@ function main {
   local url_fly_Linux="https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/fly_linux_amd64"
 
   local url_fly="url_fly_$(uname -s)"
-  local fnm_fly="$(basename "${!url_fly}")"
+  local fnm_fly="$(basename "${!url_fly}")-${CONCOURSE_VERSION}"
   cache curl "$fnm_fly" "${!url_fly}"
 
   mkdir -p "$shome/bin"
